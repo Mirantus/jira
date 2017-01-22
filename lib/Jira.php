@@ -3,7 +3,7 @@
      * Jira parser class
      */
 
-    namespace Model;
+    namespace Lib;
 
     require '../vendor/autoload.php';
 

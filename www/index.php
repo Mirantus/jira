@@ -1,8 +1,20 @@
 <?
-require '../model/Jira.php';
+require '../lib/DB.php';
+require '../lib/Jira.php';
+require '../lib/Utils.php';
 
-$jira = new \Model\Jira;
-$result = $jira->parse();
+$ini = parse_ini_file('../.env');
+$db = new \Lib\DB($ini);
+
+$jira = new \Lib\Jira;
+$data_now = $jira->parse();
+
+$db->insert([
+    'data' => serialize($data_now),
+    'date' => date('Y-m-d h:i:s')
+]);
+
+$result = \Lib\Utils::arrayRecursiveDiff($db->getLast(), $data_now);
 ?>
 
 <table border="1" width="100%" cellpadding="5">
