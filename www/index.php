@@ -8,7 +8,7 @@ $result = $jira->parse();
 <table border="1" width="100%" cellpadding="5">
     <tr>
         <? foreach ($jira->statuses as $status => $value) { ?>
-            <th><?=$value?></th>
+            <th><?=$status?></th>
         <? } ?>
     </tr>
     <? foreach ($result as $project_name => $project) { ?>

@@ -14,10 +14,10 @@
         public $projects = ['android', 'ios', 'fe', 'be'];
 
         private $projectQueries = [
-            'android' => 'project=ADRJOB',
-            'fe' => 'labels=fe and labels=mobile',
-            'ios' => 'project=IPHJOB',
-            'be' => 'labels=be and labels=mobile',
+            'android' => 'project=ADRJOB and (labels!=pm or labels is EMPTY)',
+            'fe' => 'labels=fe and labels=mobile and labels!=pm',
+            'ios' => 'project=IPHJOB and (labels!=pm or labels is EMPTY)',
+            'be' => 'labels=be and labels=mobile and labels!=pm',
             ];
 
         public $statuses = [
