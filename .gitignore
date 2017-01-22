@@ -1,3 +1,4 @@
 .idea
 .env
 vendor/*
+www/jira-rest-client.log
