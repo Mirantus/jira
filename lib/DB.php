@@ -16,7 +16,6 @@
          * @param $credentials
          */
         public function __construct($credentials) {
-            $this->dbname = $credentials['db'];
             $dsn = 'mysql:host=' . $credentials['DB_HOST'] . ';dbname=' . $credentials['DB_NAME'] . ';charset=utf8';
             $opt = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -51,7 +50,7 @@
         }
 
         public function getLast() {
-            $query = 'SELECT * FROM ' . $this->table . ' ORDER BY date desc LIMIT 1';
+            $query = 'SELECT * FROM ' . $this->table . ' WHERE date < "' . date('Y-m-d') . '" ORDER BY date desc LIMIT 1';
 
             $st = $this->pdo->prepare($query);
             $st->execute([]);
