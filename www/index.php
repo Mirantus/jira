@@ -19,29 +19,34 @@ $db->insert([
     'date' => date('Y-m-d h:i:s')
 ]);
 
-$result = \Lib\Utils::arrayRecursiveDiff($db->getLast(), $data_now);
-?>
+$last = $db->getLast();
 
-<table border="1" width="100%" cellpadding="5">
-    <tr>
-        <? foreach ($jira->statuses as $status => $value) { ?>
-            <th><?=$status?></th>
-        <? } ?>
-    </tr>
-    <? foreach ($result as $project_name => $project) { ?>
-        <tr>
-            <td colspan="7"><b><?=$project_name?></b></td>
-        </tr>
-        <tr>
-        <? foreach ($jira->statuses as $status => $value) { ?>
-            <td valign="top">
-                <? if (isset($project[$status])) { ?>
-                    <? foreach ($project[$status] as $issue) { ?>
-                        <?=$issue['key']?> <?=$issue['summary']?><br><br>
-                    <? } ?>
-                <? } ?>
-            </td>
-        <? } ?>
-        </tr>
-    <? } ?>
-</table>
+function findPrevStatus($last, $taskId) {
+    foreach ($last as $status => $tasks) {
+        foreach ($tasks as $id => $task) {
+            if ($taskId === $id) {
+                return $status;
+            }
+        }
+    }
+
+    return 'New';
+}
+
+foreach ($data_now as $project_name => $project) {
+    echo '<h1>' . $project_name . '</h1>';
+    foreach ($project as $status => $tasks) {
+        echo '<h3>' . $status . '</h3>';
+        foreach ($tasks as $id => $task) {
+            $prev_status = findPrevStatus($last[$project_name], $id);
+            echo '<div>';
+                if ($prev_status === $status) {
+                    echo '<sub>' . $task['key'] . ' ' . $task['summary'] . '</sub>';
+                } else {
+                    echo $task['key'] . ' ' . $task['summary'];
+                    echo ' <sup>' . $prev_status . '</sup>';
+                }
+            echo '</div>';
+        }
+    }
+}
