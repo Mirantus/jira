@@ -48,7 +48,8 @@
 
                         foreach ($ret->issues as $issue) {
                             $result[$project][$status][$issue->id] = [
-                                'key' => $this->prepareKey($issue->key),
+                                'key' => $issue->key,
+                                'shortkey' => $this->prepareKey($issue->key),
                                 'summary' => $issue->fields->summary,
                             ];
                         }
