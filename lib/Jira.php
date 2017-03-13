@@ -16,7 +16,7 @@
         private $projectQueries = [
             'android' => 'project=ADRJOB and (labels=android or labels=test or labels is EMPTY)',
             'fe' => 'labels=fe and labels=mobile and labels!=pm',
-            'ios' => 'project=IPHJOB and (labels=test or labels is EMPTY)',
+            'ios' => 'project=IPHJOB and (labels=ios or labels=test or labels is EMPTY)',
             'rn' => 'labels=rn-applic and labels!=pm',
             ];
 
