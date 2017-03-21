@@ -65,12 +65,18 @@ function findPrevStatus($last, $taskId) {
                                 $prev_status = findPrevStatus($last[$project_name], $id);
                                 $url = $ini['JIRA_HOST'] . '/browse/' . $task['key'];
                                 echo '<div>';
-                                if ($prev_status === $status) {
-                                    echo '<span class="text-muted"><a href="' . $url . '" target="_blank" class="text-muted">' . $task['shortkey'] . '</a> ' . $task['summary'] . '</span>';
-                                } else {
-                                    echo '<a href="' . $url . '" target="_blank">' . $task['shortkey'] . '</a> <b>' . $task['summary'] . '</b>';
-                                    echo ' <sup>' . $prev_status . '</sup>';
-                                }
+                                	$icon_class = $task['type'] == 'Ошибка' ? 'glyphicon-asterisk' : 'glyphicon-plus';
+	                                if ($prev_status === $status) {
+	                                    echo '<span class="text-muted">
+	                                    		<span class="glyphicon ' . $icon_class . '"></span>
+	                                    		<a href="' . $url . '" target="_blank" class="text-muted">' . $task['shortkey'] . '</a> ' . $task['summary'] . '
+	                                    	</span>';
+	                                } else {
+                                		$icon_color = $task['type'] == 'Ошибка' ? 'red' : 'black';
+                                		echo '<span class="glyphicon ' . $icon_class . '" style="color: ' . $icon_color . '"></span> ';
+	                                    echo '<a href="' . $url . '" target="_blank">' . $task['shortkey'] . '</a> <b>' . $task['summary'] . '</b>';
+	                                    echo ' <sup>' . $prev_status . '</sup>';
+	                                }
                                 echo '</div>';
                             }
                         echo '</div>';
