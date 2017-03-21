@@ -11,11 +11,10 @@
     use JiraRestApi\JiraException;
 
     class Jira {
-        public $projects = ['android', 'ios', 'fe', 'rn'];
+        public $projects = ['android', 'ios', 'rn'];
 
         private $projectQueries = [
             'android' => 'project=ADRJOB and (labels=android or labels=test or labels is EMPTY)',
-            'fe' => 'labels=fe and labels=mobile and labels!=pm',
             'ios' => 'project=IPHJOB and (labels=ios or labels=test or labels is EMPTY)',
             'rn' => 'labels=rn-applic and labels!=pm',
             ];
@@ -24,11 +23,12 @@
             'T.Analysis' => 'Требования разработаны',
             'Q.Analysis' => 'Тестирование требований',
             'Backlog' => 'В backlog\'е',
-            'Dev' => 'В разработке',
+            'Process' => 'В разработке',
             'Review' => 'На ревью (be)',
             'RFT' => 'Разработана',
             'Test' => 'В тестировании',
             'RFD' => 'Протестирована',
+            'Done' => 'Завершена',
         ];
 
         /**
@@ -51,6 +51,7 @@
                                 'key' => $issue->key,
                                 'shortkey' => $this->prepareKey($issue->key),
                                 'summary' => $issue->fields->summary,
+                                'type' => $issue->fields->issuetype->name
                             ];
                         }
                     } catch (JiraException $e) {
