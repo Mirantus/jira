@@ -51,6 +51,9 @@ function findPrevStatus($last, $taskId) {
             }
         ?>
     </ul>
+    <div class="navbar-form navbar-right">
+        <a href="print.php" target="_blank" class="btn btn-default" style="margin-right: 20px">Печать</a>
+    </div>
 </div>
 <div class="container">
     <div class="tab-content">
