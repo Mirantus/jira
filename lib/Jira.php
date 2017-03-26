@@ -23,7 +23,7 @@
             'T.Analysis' => 'Требования разработаны',
             'Q.Analysis' => 'Тестирование требований',
             'Backlog' => 'В backlog\'е',
-            'Process' => 'В разработке',
+            'In Progress' => 'В разработке',
             'Review' => 'На ревью (be)',
             'RFT' => 'Разработана',
             'Test' => 'В тестировании',
@@ -40,6 +40,13 @@
             foreach ($this->projects as $project) {
                 foreach ($this->statuses as $status => $status_title) {
                     $jql = $this->projectQueries[$project] . ' and status="' . $status_title . '"';
+
+                    if ($status == 'Done') {
+                        $weekday = date('w');
+                        $days_since_monday = $weekday ? $weekday - 1 : 6;
+                        $last_monday = date('Y/m/d', strtotime('-' . $days_since_monday . ' days'));
+                        $jql .= ' and resolutiondate >= "' . $last_monday . '"';
+                    }
 
                     try {
                         $issueService = new IssueService();
