@@ -66,7 +66,8 @@ function findPrevStatus($last, $taskId) {
     foreach ($data_now as $project_name => $project) {
         foreach ($project as $status => $tasks) {
             foreach ($tasks as $id => $task) {
-                $prev_status = findPrevStatus($last[$project_name], $id);
+                $last_project = isset($last[$project_name]) ? $last[$project_name] : [];
+                $prev_status = findPrevStatus($last_project, $id);
                 $url = $ini['JIRA_HOST'] . '/browse/' . $task['key'];
                 if ($prev_status == 'New') {
                     echo '<div class="print-card">';
