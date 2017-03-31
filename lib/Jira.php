@@ -11,9 +11,10 @@
     use JiraRestApi\JiraException;
 
     class Jira {
-        public $projects = ['android', 'ios', 'rn'];
+        public $projects = ['design', 'android', 'ios', 'rn'];
 
         private $projectQueries = [
+            'design' => 'project=ADRJOB and labels=design',
             'android' => 'project=ADRJOB and (labels=android or labels=test or labels is EMPTY)',
             'ios' => 'project=IPHJOB and (labels=ios or labels=test or labels is EMPTY)',
             'rn' => 'labels=rn-applic and labels!=pm',
