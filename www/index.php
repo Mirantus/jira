@@ -65,7 +65,8 @@ function findPrevStatus($last, $taskId) {
                         echo '<div class="panel-heading"><h3 class="panel-title">' . $status . '</h3></div>';
                         echo '<div class="panel-body">';
                             foreach ($tasks as $id => $task) {
-                                $prev_status = findPrevStatus($last[$project_name], $id);
+                                $last_project = isset($last[$project_name]) ? $last[$project_name] : [];
+                                $prev_status = findPrevStatus($last_project, $id);
                                 $url = $ini['JIRA_HOST'] . '/browse/' . $task['key'];
                                 echo '<div>';
                                 	$icon_class = $task['type'] == 'Ошибка' ? 'glyphicon-asterisk' : 'glyphicon-plus';
