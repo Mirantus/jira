@@ -44,12 +44,15 @@ function findPrevStatus($last, $taskId) {
             overflow: hidden;
             font-family: Arial, sans-serif;
         }
-        .shortkey {
+        .head {
             font-size: 50px;
             border-bottom: 1px solid black;
             padding: 10px 20px;
             box-sizing: border-box;
             height: 80px;
+        }
+        .type {
+            float: right;
         }
         .summary {
             width: 250px;
@@ -71,10 +74,20 @@ function findPrevStatus($last, $taskId) {
                 $url = $ini['JIRA_HOST'] . '/browse/' . $task['key'];
                 if ($prev_status == 'New') {
                     echo '<div class="print-card">';
-                        echo '<div class="shortkey">';
-                            $icon_color = $task['type'] == 'Ошибка' ? 'red' : 'black';
-                            echo '<span style="color: ' . $icon_color . '">&#9679;</span> ';
-                            echo $task['shortkey'];
+                        echo '<div class="head">';
+                            echo '<div class="type">';
+                                if (in_array('design', $task['labels'])) {
+                                    echo 'D';
+                                }
+                                if (in_array('test', $task['labels'])) {
+                                    echo 'T';
+                                }
+                            echo '</div>';
+                            echo '<div class="shortkey">';
+                                $icon_color = $task['type'] == 'Ошибка' ? 'red' : 'black';
+                                echo '<span style="color: ' . $icon_color . '">&#9679;</span> ';
+                                echo $task['shortkey'];
+                            echo '</div>';
                         echo '</div>';
                         echo '<div class="summary">' . $task['summary'] . '</div>';
                     echo '</div>';

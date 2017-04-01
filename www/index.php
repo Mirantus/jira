@@ -74,12 +74,15 @@ function findPrevStatus($last, $taskId) {
 	                                    echo '<span class="text-muted">
 	                                    		<span class="glyphicon ' . $icon_class . '"></span>
 	                                    		<a href="' . $url . '" target="_blank" class="text-muted">' . $task['shortkey'] . '</a> ' . $task['summary'] . '
+	                                    		&nbsp; <span style="font-size: smaller">' . $task['assignee'] . '</span>
 	                                    	</span>';
 	                                } else {
                                 		$icon_color = $task['type'] == 'Ошибка' ? 'red' : 'black';
                                 		echo '<span class="glyphicon ' . $icon_class . '" style="color: ' . $icon_color . '"></span> ';
-	                                    echo '<a href="' . $url . '" target="_blank">' . $task['shortkey'] . '</a> <b>' . $task['summary'] . '</b>';
-	                                    echo ' <sup>' . $prev_status . '</sup>';
+	                                    echo ' <a href="' . $url . '" target="_blank">' . $task['shortkey'] . '</a>';
+                                        echo ' <b>' . $task['summary'] . '</b>';
+                                        echo ' <sup>' . $prev_status . '</sup>';
+	                                    echo ' &nbsp; <span style="font-size: smaller">' . $task['assignee'] . '</span>';
 	                                }
                                 echo '</div>';
                             }

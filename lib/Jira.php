@@ -59,7 +59,9 @@
                                 'key' => $issue->key,
                                 'shortkey' => $this->prepareKey($issue->key),
                                 'summary' => $issue->fields->summary,
-                                'type' => $issue->fields->issuetype->name
+                                'type' => $issue->fields->issuetype->name,
+                                'labels' => $issue->fields->labels,
+                                'assignee' => $issue->fields->assignee->displayName
                             ];
                         }
                     } catch (JiraException $e) {
